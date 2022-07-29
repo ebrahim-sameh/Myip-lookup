@@ -1,6 +1,7 @@
 import platform
 from urllib import request
 import ipaddress
+import httpagentparser
 
 from requests import get
 from django.shortcuts import render
@@ -43,7 +44,13 @@ def HomeView(requests):
     datadet = get('http://ip-api.com/json/'+data).text
     hostname = socket.gethostname()
     ipadrr = socket.gethostbyname(hostname)
-    browser = requests.META['HTTP_USER_AGENT']
+    # browser = requests.META['HTTP_USER_AGENT']
+
+    agent = requests.META["HTTP_USER_AGENT"]
+    s = httpagentparser.detect(agent)["os"]
+    browser = httpagentparser.detect(agent)["browser"]
+
+
     if requests.method == "POST":
         f = requests.POST.get('username')
         print("Do something")
@@ -52,7 +59,7 @@ def HomeView(requests):
      context = {"pubip": data,
                "pubip6": data6,
                "privip": ipadrr,
-               "os": platform.system(),
+               "os": s,
                "browser": browser,
                 "city":city,
                "country": country,
