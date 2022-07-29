@@ -2,7 +2,7 @@ import platform
 from urllib import request
 import ipaddress
 import httpagentparser
-
+import json
 from requests import get
 from django.shortcuts import render
 from django.shortcuts import redirect
@@ -49,8 +49,6 @@ def HomeView(requests):
     agent = requests.META["HTTP_USER_AGENT"]
     s = httpagentparser.detect(agent)["os"]
     browser = httpagentparser.detect(agent)["browser"]
-
-
     if requests.method == "POST":
         f = requests.POST.get('username')
         print("Do something")
