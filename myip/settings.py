@@ -13,7 +13,6 @@ import os
 from pathlib import Path
 import django_heroku
 
-django_heroku.settings(locals())
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -129,3 +128,4 @@ LANGUAGES = [
 
 STATIC_URL = '/static/'
 GEOIP_PATH = os.path.join(BASE_DIR, 'geoip')
+django_heroku.settings(locals())
