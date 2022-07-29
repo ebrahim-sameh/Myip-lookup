@@ -16,8 +16,8 @@ import urllib.request
 from bs4 import BeautifulSoup
 import ssl
 def HomeView(requests):
-    # data = get('https://api.ipify.org').text
-    data = requests.META.get('REMOTE_ADDR', None)
+    data = get('https://api.ipify.org').text
+    # data = requests.META.get('REMOTE_ADDR', None)
     g = GeoIP2()
     country = g.country(data)
     city = g.city(data)
