@@ -1,0 +1,258 @@
+{% extends 'iplookup/base.html' %}
+{%load static%}
+
+{%block content%}
+<body>
+
+  <!-- ======= Header ======= -->
+  <header id="header" class="fixed-top">
+    <div class="container d-flex align-items-center justify-content-between">
+
+      <h1 class="logo"><a href="{%url 'home'%}">MyIP.live</a></h1>
+      <!-- Uncomment below if you prefer to use an image logo -->
+      <!-- <a href="index.html" class="logo"><img src="{% static 'assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+      <nav id="navbar" class="navbar">
+        <ul>
+          <li><a class="nav-link scrollto active" href="{%url 'home'%}">Home</a></li>
+          <li><a class="nav-link scrollto" href="{%url 'iplookup'%}">IPlookup</a></li>
+          <li><a class="nav-link scrollto" href="{%url 'whois'%}">WHOIS lookup</a></li>
+          <li><a class="nav-link scrollto o" href="{%url 'dns'%}">DNS lookup</a></li>
+          <li><a class="nav-link scrollto" href="{%url 'proxy'%}">Proxy check</a></li>
+          <li><a class="nav-link scrollto" href="{%url 'tools'%}">All tools</a></li>
+          <li class="dropdown"><a href="#"><span>more</span> <i class="bi bi-chevron-down"></i></a>
+            <ul>
+              <li><a href="#">API</a></li>
+              </li>
+              <li><a href="#">blog</a></li>
+              <li><a href="#">Forum</a></li>
+              <li><a href="#">Feture request</a></li>
+            </ul>
+
+          </li>
+          <li><a class="nav-link scrollto" href="#contact">Contact</a></li>
+
+        </ul>
+        <i class="bi bi-list mobile-nav-toggle"></i>
+                  <select class="selectpicker" data-width="fit" style="
+    margin-left: 15px;
+">
+              <option data-content='<span class="flag-icon flag-icon-us"></span> English'>English</option>
+            <option  data-content='<span class="flag-icon flag-icon-mx"></span> Español'>Español</option>
+          </select>
+
+      </nav><!-- .navbar -->
+
+    </div>
+  </header><!-- End Header -->
+
+  <!-- ======= Hero Section ======= -->
+  <section id="hero" class="d-flex align-items-center">
+    <div class="container position-relative" data-aos="fade-up" data-aos-delay="100" >
+      <div class="row justify-content-center">
+
+
+        <div class="card" style="width: 180rem;">
+          <p> IP-Location for {{pubip}}</p><br>
+           <p> {{pubip}} is a IPV4 Located in {{country.country_name}}, {{city.city}} city operated by {{det.isp}} </p>
+
+
+          <div class="card-body">
+          </div>
+
+
+
+        </div>
+                        <div class="card" style="width: 20rem;">
+          <p> IP Search Hisroty</p><br>
+
+
+          <div class="card-body">
+            {{pubip}}
+          </div>
+        </div>
+      </div>
+
+
+      <div class="">
+     <form method="POST" action="">
+      {% csrf_token %}
+      <input type="text" name="username"  style="
+    height: 35px;
+    width: 330px;
+"/>
+      <input type="submit" value="Lookup"   class="btn-get-started scrollto"/>
+     </form>
+
+
+      </div>
+
+      <div class="row icon-boxes " style="
+    margin-top: 20px;
+">
+        <div class="col-md-6  align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200" style="
+    width: -webkit-fill-available;
+">
+          <div class="icon-box text-center">
+            <h4 class="title"><a href="">IP Adrress Details is:</a></h4>
+                        <div style="display: flex; justify-content: center;;">
+              <p >Last Update on:&nbsp;11-11-11</p>
+            </div>
+            <div>
+              <div style="display: flex; justify-content: center;">
+                <p >IPV4:&nbsp;{{pubip}} </p>
+              </div>
+            </div>
+            <div style="display: flex; justify-content: center;">
+                <p >Country:&nbsp;{{city.country_name}}</p>
+            </div>
+            <div style="display: flex; justify-content: center;;">
+              <p >city:&nbsp;{{city.city}}</p>
+            </div>
+                        <div style="display: flex; justify-content: center;;">
+              <p >is in european union? :&nbsp;{{city.is_in_european_union}}</p>
+            </div>
+                       <div style="display: flex; justify-content: center;;">
+              <p >postal code:&nbsp;{{city.postal_code}}</p>
+            </div>
+                       <div style="display: flex; justify-content: center;;">
+              <p >latitude - longitude :&nbsp;{{city.latitude}} - {{city.longitude}}</p>
+            </div>
+                                   <div style="display: flex; justify-content: center;;">
+              <p >time zone :&nbsp;{{city.time_zone}}</p>
+            </div>
+            <div style="display: flex; justify-content: center;;">
+              <p >continent name :&nbsp;{{city.continent_name}}</p>
+            </div>
+             <div style="display: flex; justify-content: center;;">
+              <p >org :&nbsp;{{det.org}}</p>
+            </div>
+             <div style="display: flex; justify-content: center;;">
+              <p >isp :&nbsp;{{det.isp}}</p>
+            </div>
+                         <div style="display: flex; justify-content: center;;">
+              <p >region Name :&nbsp;{{det.regionName}}</p>
+            </div>
+                                <div style="display: flex; justify-content: center;;">
+              <p > as :&nbsp;{{det.as}}</p>
+            </div>
+
+
+            <div style="display: flex; justify-content: center;;">
+              <p >OS:&nbsp;{{os}}</p>
+            </div>
+            <div style="display: flex; justify-content: center;;">
+              <p >Browser:&nbsp;{{browser}}</p>
+            </div>
+
+
+
+
+            <div class="card" style="width: auto;">
+              <img src="" class="card-img-top" alt="ADS">
+              <p>ADS ADS ADS</p>
+              <div class="card-body">
+              </div>
+            </div>
+            </div>
+
+
+
+          </div>
+        </div>
+
+  <div class="row icon-boxes ">
+          <div class="col-md-6  align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200" style="
+      width: -webkit-fill-available;
+  ">
+            <div class="icon-box">
+              <h4 class="text-center"><a href="">Share your Ip-lookup</a></h4>
+
+              <div class="text-center">
+
+                   <input type="text" value= {{ request.build_absolute_uri }} id="myInput"/>
+                  <button onclick="Hello()" class="btn-get-started scrollto">Copy Text</button>
+
+                     <script>function Hello() {
+                           var copyText = document.getElementById('myInput')
+                        copyText.select();
+                         document.execCommand('copy')
+                             console.log('Copied Text')}</script>
+
+                  <div>
+
+<div class="row icon-boxes ">
+          <div class="col-md-6  align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200" style="
+      width: -webkit-fill-available;
+  ">
+            <div class="icon-box">
+              <h4 class="text-center"><a href="">Your location</a></h4>
+                  <iframe src="https://openstreetmap23.herokuapp.com/" style="border: 0; width: 100%; height: 100%"></iframe>
+                  <div>
+
+
+        <div class="row icon-boxes ">
+          <div class="col-md-6  align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200" style="
+      width: -webkit-fill-available;
+  ">
+            <div class="icon-box">
+              <h4 class="text-center"><a href="">Is it VPN or PROXY ?</a></h4>
+
+              <div class="text-center">
+                  <input type="text" id="usr" style="
+            height: 35px;
+            width: 330px;
+        ">
+                  <a href="#about" class="btn-get-started scrollto">LOOKUP</a>
+              </div>
+              <div>
+
+
+
+            </div>
+          </div>
+
+      </div>
+    </div>
+
+
+
+            <div class="row icon-boxes ">
+              <div class="col-md-6  align-items-stretch mb-5 mb-lg-0" data-aos="zoom-in" data-aos-delay="200" style="
+          width: -webkit-fill-available;
+      ">
+                <div class="icon-box">
+                  <h4 class="text-center"><a href="">Who owns this IP ?</a></h4>
+
+                  <div class="text-center">
+                      <input type="text" id="usr" style="
+                height: 35px;
+                width: 330px;
+            ">
+                      <a href="#about" class="btn-get-started scrollto">LOOKUP</a>
+                  </div>
+                  <div>
+
+
+
+                </div>
+              </div>
+              <div class="card mt-5" style="width: auto;">
+                <img src="" class="card-img-top" alt="ADS">
+                <p>ADS ADS ADS</p>
+                <div class="card-body">
+                </div>
+              </div>
+              </div>
+
+          </div>
+        </div>
+
+
+
+
+
+  </section><!-- End Hero -->
+
+
+{%endblock%}
