@@ -28,3 +28,4 @@ tzdata==2022.1
 urllib3==1.26.11
 yarl==1.7.2
 django-heroku==0.3.1
+gunicorn==20.0.4
