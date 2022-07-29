@@ -1,5 +1,6 @@
 import platform
 from urllib import request
+import ipaddress
 
 from requests import get
 from django.shortcuts import render
@@ -29,7 +30,16 @@ def HomeView(requests):
     g = GeoIP2()
     country = g.country(data)
     city = g.city(data)
-    data6 = get('https://api64.ipify.org').text
+
+
+    # data6 = get('https://api64.ipify.org').text
+    ip4str = data
+    # prefix6to4 = int(ipaddress.IPv6Address("2002::"))
+    # ip4 = ipaddress.IPv4Address(data)
+    # ip6 = ipaddress.IPv6Address(prefix6to4 | (int(ip4) << 80))
+    ip6 = ipaddress.IPv6Address('2002::' + data).compressed
+    data6 = ip6
+
     datadet = get('http://ip-api.com/json/'+data).text
     hostname = socket.gethostname()
     ipadrr = socket.gethostbyname(hostname)
