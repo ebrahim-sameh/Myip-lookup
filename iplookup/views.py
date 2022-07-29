@@ -69,17 +69,33 @@ def HomeView(requests):
      return render(requests, 'iplookup/home.html', context)
 
 def IpLookup(requests):
-    data = get('https://api.ipify.org').text
+    x_forwarded_for = requests.META.get('HTTP_X_FORWARDED_FOR')
+
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = requests.META.get('REMOTE_ADDR')
+
+    data = ip
+    # data = get('https://api.ipify.org').text
     # data = requests.META.get('REMOTE_ADDR', None)
     g = GeoIP2()
     country = g.country(data)
     city = g.city(data)
 
-    data6 = get('https://api64.ipify.org').text
+    ip6 = ipaddress.IPv6Address('2002::' + data).compressed
+    data6 = ip6
+
+    # data6 = get('https://api64.ipify.org').text
     datadet = get('http://ip-api.com/json/' + data).json
     hostname = socket.gethostname()
     ipadrr = socket.gethostbyname(hostname)
-    browser = requests.META['HTTP_USER_AGENT']
+
+    agent = requests.META["HTTP_USER_AGENT"]
+    s = httpagentparser.detect(agent)["os"]
+    browser = httpagentparser.detect(agent)["browser"]
+
+    # browser = requests.META['HTTP_USER_AGENT']
     ssl._create_default_https_context = ssl._create_unverified_context
     url = "https://ipwhois.io/" + data
     # html = urllib.request.urlopen(url)
@@ -95,7 +111,7 @@ def IpLookup(requests):
      context = {"pubip": data,
                "pubip6": data6,
                "privip": ipadrr,
-               "os": platform.system(),
+               "os": s,
                "browser": browser,
                "city": city,
                "country": country,
